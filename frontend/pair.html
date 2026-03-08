@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERANDA MD - Pair Code</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --black-1:#000000;
+  --black-2:#0d0d0d;
+  --black-3:#1a1a1a;
+  --bg-main:#050505;
+  --card-bg:rgba(15,15,15,0.95);
+  --text-main:#ffffff;
+  --text-soft:#999;
+  --border-dark:rgba(255,255,255,0.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at top right,#111,#000 70%);
+  color:var(--text-main);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* Dark Glow */
+body::before{
+  content:'';
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
+  top:-200px;
+  right:-200px;
+  filter:blur(80px);
+  z-index:-1;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(25px);
+  border:1px solid var(--border-dark);
+  box-shadow:0 20px 60px rgba(0,0,0,0.8);
+  border-radius:28px;
+  padding:3rem 2rem;
+  width:95%;
+  max-width:420px;
+  text-align:center;
+  transition:0.4s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.9);
+}
+
+h1{
+  font-size:2.3rem;
+  font-weight:800;
+  letter-spacing:2px;
+  color:#fff;
+  margin-bottom:0.5rem;
+}
+
+h4{
+  font-weight:500;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  font-size:0.95rem;
+}
+
+.input-group{
+  margin-bottom:1.5rem;
+}
+
+input{
+  width:100%;
+  padding:1rem 1.2rem;
+  border-radius:14px;
+  border:1px solid var(--border-dark);
+  background:#000;
+  color:#fff;
+  font-size:1rem;
+  outline:none;
+}
+
+input::placeholder{
+  color:#555;
+}
+
+button{
+  width:100%;
+  padding:1rem;
+  border:none;
+  border-radius:14px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  letter-spacing:1px;
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  transition:0.3s ease;
+}
+
+button:hover{
+  background:#111;
+  transform:translateY(-3px);
+}
+
+.code-container{
+  margin-top:1.5rem;
+  padding:1rem;
+  border-radius:12px;
+  border:1px dashed #333;
+  background:#000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.code-text{
+  font-family:monospace;
+  font-size:1.1rem;
+  letter-spacing:2px;
+  color:#fff;
+  font-weight:600;
+}
+
+.footer{
+  margin-top:2rem;
+  font-size:0.8rem;
+  color:#777;
+}
+
+.footer a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>MADUSANKA MD</h1>
+  <h4>Enter your WhatsApp number with country code</h4>
+
+  <div class="input-group">
+    <input type="number" id="number" placeholder="e.g. 9478xxxxxxx">
+  </div>
+
+  <button id="submit">
+    <i class="fas fa-key"></i> Generate Code
+  </button>
+
+  <div id="pair"></div>
+
+  <div class="footer">
+    © 2026 — Developed by <br>
+    <a href="#">MADUSANKA MD</a>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+
+<script>
+const input = document.getElementById("number");
+const button = document.getElementById("submit");
+const output = document.getElementById("pair");
+
+function showToast(msg){
+  alert(msg);
+}
+
+async function Copy(){
+  const code = document.querySelector(".code-text").innerText;
+  await navigator.clipboard.writeText(code);
+  showToast("Code Copied!");
+}
+
+button.addEventListener("click", async () => {
+  const raw = input.value.trim().replace(/[^0-9]/g,"");
+  if(!raw || raw.length < 11){
+    showToast("Invalid phone number");
+    return;
+  }
+
+  button.innerHTML = "Please wait...";
+  button.disabled = true;
+
+  try{
+    const { data } = await axios(`/code?number=${raw}`);
+    if(data.code){
+      output.innerHTML = `
+        <div class="code-container" onclick="Copy()">
+          <span class="code-text">${data.code}</span>
+          <i class="fas fa-copy"></i>
+        </div>
+      `;
+    }else{
+      showToast("Could not generate code");
+    }
+  }catch(e){
+    showToast("Server error");
+  }
+
+  button.innerHTML = '<i class="fas fa-key"></i> Generate Code';
+  button.disabled = false;
+});
+</script>
+
+</body>
+</html>

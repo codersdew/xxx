@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ERANDA MD - WhatsApp Bot</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --black-1:#000000;
+  --black-2:#0d0d0d;
+  --black-3:#1a1a1a;
+  --bg-main:#050505;
+  --card-bg:rgba(15,15,15,0.95);
+  --text-main:#ffffff;
+  --text-soft:#999;
+  --border-dark:rgba(255,255,255,0.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at top right,#111,#000 70%);
+  color:var(--text-main);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,rgba(255,255,255,0.05),transparent 70%);
+  top:-200px;
+  right:-200px;
+  filter:blur(80px);
+  z-index:-1;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(25px);
+  border:1px solid var(--border-dark);
+  box-shadow:0 20px 60px rgba(0,0,0,0.8);
+  border-radius:28px;
+  padding:3rem 2rem;
+  width:95%;
+  max-width:460px;
+  text-align:center;
+  transition:0.4s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.9);
+}
+
+h1{
+  font-size:2.3rem;
+  font-weight:800;
+  letter-spacing:2px;
+  color:#fff;
+  margin-bottom:0.5rem;
+}
+
+h4{
+  font-weight:500;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  font-size:0.95rem;
+}
+
+.btn{
+  display:inline-block;
+  width:100%;
+  padding:1rem;
+  border:none;
+  border-radius:14px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  letter-spacing:1px;
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  transition:0.3s ease;
+  text-decoration:none;
+  margin-bottom:0.75rem;
+}
+
+.btn:hover{
+  background:#111;
+  transform:translateY(-3px);
+}
+
+.footer{
+  margin-top:2rem;
+  font-size:0.8rem;
+  color:#777;
+}
+
+.footer a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>MADUSANKA MD</h1>
+  <h4>MADUSANKA-MINI WhatsApp Bot</h4>
+
+  <a class="btn" href="/pair">
+    <i class="fas fa-key"></i> Get Pair Code
+  </a>
+
+  <div class="footer">
+    © 2026 — Developed by <br>
+    <a href="#">ERANDA MD</a>
+  </div>
+</div>
+
+</body>
+</html>
