@@ -65,7 +65,7 @@ const config = {
   MOVIE_ADS: 'false',
 };
 // Configs
-const footer = `*🫟 THANKS FOR CONTACT MADUSANKA*`
+const footer = `*🫟 BOT SUPPOTERS ON DCT*`
 const logo = `https://files.catbox.moe/cy9eam.jpeg`;
 const caption = `乂 ─͟͟͞͞ MADUSANKA📍 𝕄𝕀ℕ𝕀 💖⦁⚋➩`; 
 const botName = '─͟͟͞͞ MADUSANKA📍'
